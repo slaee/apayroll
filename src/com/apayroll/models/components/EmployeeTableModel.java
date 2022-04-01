@@ -86,9 +86,14 @@ public class EmployeeTableModel extends AbstractTableModel{
         return null;
     }
 
-    public boolean removeRow(long id, int row) {
-        EmployeeRoster re = new EmployeeRoster();
-        fireTableRowsDeleted(row, row);
-        return re.removeEmployee(id);
+    public boolean removeRow(long id, int index) {
+        EmployeeRoster er = new EmployeeRoster();
+        boolean isRemoved = false;
+        if(er.removeEmployee(id))
+            isRemoved = true;
+        
+        employeeList.remove(index);
+        fireTableRowsDeleted(index, index);
+        return isRemoved;
     }
 }

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class EmployeeRoster {
     Database db;
-    ArrayList<Employee> employeeList = new ArrayList();
+    static ArrayList<Employee> employeeList;
     
     public EmployeeRoster(){
         db = new Database();
@@ -89,6 +89,7 @@ public class EmployeeRoster {
     }
 
     public void updateList(){
+        employeeList = new ArrayList();
         try {
             db.query("SELECT e.*, r.* FROM dbb_employee e LEFT JOIN dbb_rfid r ON r.user_id = e.id");
             db.execute();
@@ -115,6 +116,10 @@ public class EmployeeRoster {
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public int size(){
+        return employeeList.size();
     }
     
     public ArrayList<Employee> getEmployeeList(){

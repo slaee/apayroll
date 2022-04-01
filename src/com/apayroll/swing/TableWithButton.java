@@ -83,6 +83,7 @@ public class TableWithButton extends JTable{
                         selectedId = (Long) getCellEditorValue();
                         stopCellEditing();
                         ((EmployeeTableModel) getModel()).removeRow(selectedId, selectedRow);
+//                        ((DefaultTableModel) getModel()).removeRow(selectedRow);
                     }
                 });
             }
