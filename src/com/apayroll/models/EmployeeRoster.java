@@ -7,7 +7,8 @@ package com.apayroll.models;
 
 import com.apayroll.libcore.Database;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class EmployeeRoster {
     Database db;
-    List<Employee> employee;
+    ArrayList<Employee> employeeList = new ArrayList();
     
     public EmployeeRoster(){
         db = new Database();
@@ -85,5 +86,38 @@ public class EmployeeRoster {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void updateList(){
+        try {
+            db.query("SELECT e.*, r.* FROM dbb_employee e LEFT JOIN dbb_rfid r ON r.user_id = e.id");
+            db.execute();
+            ResultSet res = db.getResultSet();
+            while(res.next()){
+                if(EmployeeType.valueOf(res.getString("employeeType")) == EmployeeType.HOURLY_EMPLOYEE){
+                    HourlyEmployee he = new HourlyEmployee();
+                    he.setId(res.getString("user_rfid_number"));
+                    he.setFirstName(res.getString("firstName"));
+                    he.setMiddleName(res.getString("middleName"));
+                    he.setLastName(res.getString("lastName"));
+                    he.setType(EmployeeType.HOURLY_EMPLOYEE);
+                    employeeList.add(he);
+                } else {
+                    RegularEmployee re = new RegularEmployee();
+                    re.setId(res.getString("user_rfid_number"));
+                    re.setFirstName(res.getString("firstName"));
+                    re.setMiddleName(res.getString("middleName"));
+                    re.setLastName(res.getString("lastName"));
+                    re.setType(EmployeeType.REGULAR_EMPLOYEE);
+                    employeeList.add(re);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public ArrayList<Employee> getEmployeeList(){
+        return employeeList;
     }
 }

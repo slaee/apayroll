@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author sly
  */
-public class Database implements Config {
+public class Database implements Config{
     private Connection db = null;
     private String SQLStatement = null;
     private PreparedStatement stmt = null;
@@ -34,7 +36,6 @@ public class Database implements Config {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             db = (Connection) DriverManager.getConnection("jdbc:mysql://"+HOST+":"+MYSQL_PORT+"/"+DB_NAME, MYSQL_USERNAME, MYSQL_PASSWORD);
-            System.out.println("Connected to database");
         } catch (SQLException e){
             System.out.println(e.getErrorCode());
         } catch (ClassNotFoundException ex) {
@@ -126,7 +127,6 @@ public class Database implements Config {
     public void execute() throws SQLException{
         if(SQLStatement.toUpperCase().matches(".*\\bSELECT\\b.*")){
             res = stmt.executeQuery();
-            System.out.println("True");
         } else {
             stmt.executeUpdate();
             ResultSet res = stmt.getGeneratedKeys();
@@ -143,12 +143,15 @@ public class Database implements Config {
         return lastInsertedId;
     }
 
-    // get result set as array of objects
-    public Vector<Object> fetchDataObjects(){
-        Vector<Object> data = new Vector<>();
+    public ResultSet getResultSet(){
+        return res;
+    }
+
+    public List<Object> fetchDataObjects(){
+        List<Object> data = new ArrayList<>();
         try {
             while(res.next()){
-                Vector<Object> row = new Vector<>();
+                List<Object> row = new ArrayList<>();
                 for(int i = 1; i <= res.getMetaData().getColumnCount(); i++){
                     row.add(res.getObject(i));
                 }

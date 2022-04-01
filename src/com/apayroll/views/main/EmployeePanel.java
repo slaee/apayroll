@@ -7,7 +7,9 @@ package com.apayroll.views.main;
 
 import com.apayroll.components.Form;
 import com.apayroll.libcore.Database;
+import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.components.ButtonType;
+import com.apayroll.models.components.EmployeeTableModel;
 import com.apayroll.swing.ScrollBarCustom;
 import com.apayroll.swing.renderers.ButtonEditor;
 import com.apayroll.swing.renderers.ButtonRenderer;
@@ -38,23 +40,10 @@ public class EmployeePanel extends javax.swing.JPanel {
         scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
     
-     public void startFetchData() throws SQLException{
-//        db.query("SELECT r.user_rfid_number, e.firstName, e.middleName, e.lastName, e.employeeType "
-//                + "FROM dbb_employee e "
-//                + "LEFT JOIN dbb_rfid r ON r.user_id = e.id");
-//        db.execute();
-//       
-//        for (Iterator<Object> it = db.fetchDataObjects().iterator(); it.hasNext();) {
-//            Vector<Object> o = (Vector<Object>) it.next();
-//
-//            table.addRow(new Object[] {o.get(0), o.get(1), o.get(2), o.get(3), o.get(4), "DELETE"});
-//            table.getColumn("Action").setCellRenderer(new ButtonRenderer());
-//            table.getColumn("Action").setCellEditor(new ButtonEditor(new JTextField()));
-//        }
-        table.addRow(new Object[] {"APC-242", "John", "Drake", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+    public void startFetchData() throws SQLException{
+        EmployeeRoster er = new EmployeeRoster();
+        er.updateList();
+        table.setModel(new EmployeeTableModel(er.getEmployeeList()));
         table.setCellNotEditorColumn("Action");
     }
 
