@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
  * This class will simply do the CRUD method upon manipulating data in the views;
  */
 public class EmployeeTableModel extends AbstractTableModel{
-    private String columnNames[] = {"Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"};
+    private final String columnNames[] = {"Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"};
     private ArrayList<Employee> employeeList;
     
     public EmployeeTableModel(ArrayList<Employee> employeeList){

@@ -15,6 +15,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -43,6 +44,7 @@ public class TableWithButton extends JTable{
                 if(col != 5){
                     Component com = super.getTableCellRendererComponent(jtable, o, selected, bln1, row, col);
                     com.setBackground(Color.WHITE);
+                    setHorizontalAlignment(SwingConstants.LEFT);
                     setBorder(noFocusBorder);
                     if(selected){
                         com.setForeground(new Color(15, 89, 140));
@@ -52,13 +54,11 @@ public class TableWithButton extends JTable{
                     return com;
                 } else {
                     ButtonType type;
-                    
                     if(o instanceof String){
                         type = (ButtonType) ButtonType.DELETE;
                     } else {
                         type = (ButtonType) o;
                     }
-                    
                     CellButton cell = new CellButton(type);
                     return cell;
                 }
@@ -96,7 +96,7 @@ public class TableWithButton extends JTable{
             @Override
             public Object getCellEditorValue() {
                 if(clicked) {
-                    JOptionPane.showMessageDialog(btn, "Deleted "+ selectedId);
+                    JOptionPane.showMessageDialog(btn, "Deleted Employee "+ selectedId);
                 }
                 clicked = false;
                 return selectedId;
