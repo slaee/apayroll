@@ -8,6 +8,8 @@ package com.apayroll.models;
 import com.apayroll.libcore.Database;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,11 +31,32 @@ public class EmployeeRoster {
             db.bind(3, emp.getLastName());
             db.bind(4, emp.getType().toString());
             db.execute();
+            if(!doInsertRfid(emp.getId())){
+                db.rollBack();
+            }
             return true;
         } catch (SQLException e){
             e.printStackTrace();
         }
         return false;
+    }
+    
+    private boolean doInsertRfid(String rfid){
+        try {
+            db.query("INSERT INTO dbb_rfid (user_id, user_rfid_number) VALUES (?, ?)", true);
+            System.out.println(getLastInsertId());
+            db.bind(1, getLastInsertId());
+            db.bind(2, rfid);
+            db.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeRoster.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    public long getLastInsertId(){
+        return db.getLastInsertId();
     }
 
     public boolean removeEmployee(Employee emp){

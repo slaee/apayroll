@@ -134,6 +134,9 @@ public class Database implements Config {
                 this.lastInsertedId = res.getLong(1);
             }
         }
+        
+        stmt = null;
+        SQLStatement = "";
     }
     
     public long getLastInsertId(){

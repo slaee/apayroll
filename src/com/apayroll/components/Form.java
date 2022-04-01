@@ -209,13 +209,15 @@ public class Form extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
         EmployeeRoster er = new EmployeeRoster();
+        String id = txtFieldRfid.getText();
         String firstName = txtFieldFirstName.getText();
         String middleName = txtFieldMiddleName.getText();
         String lastName = txtFieldLastName.getText();
-        String errorMessage = "";
-        if(!firstName.equals("") && !middleName.equals("") && !lastName.equals("")){
+        String errorMessage;
+        if(!firstName.equals("") && !lastName.equals("") && !id.equals("")){
             if(enumEmployee.getSelectedItem() == EmployeeType.REGULAR_EMPLOYEE){
                 RegularEmployee re = new RegularEmployee();
+                re.setId(id);
                 re.setFirstName(firstName);
                 re.setMiddleName(middleName);
                 re.setLastName(lastName);
@@ -230,6 +232,7 @@ public class Form extends javax.swing.JFrame {
                 }
             } else {
                 HourlyEmployee he = new HourlyEmployee();
+                he.setId(id);
                 he.setFirstName(firstName);
                 he.setMiddleName(middleName);
                 he.setLastName(lastName);
@@ -243,6 +246,7 @@ public class Form extends javax.swing.JFrame {
                     errorMessage = "Employee add unsuccessfull";
                 }
             }
+            
         } else {
             errorMessage = "Employee add unsuccessfull";
         }
@@ -307,10 +311,18 @@ public class Form extends javax.swing.JFrame {
 
     private void txtFieldRfidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldRfidFocusGained
         // TODO add your handling code here:
+        if(txtFieldRfid.getText().equals("RFID")){
+            txtFieldRfid.setText("");
+            txtFieldRfid.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_txtFieldRfidFocusGained
 
     private void txtFieldRfidFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFieldRfidFocusLost
         // TODO add your handling code here:
+        if(txtFieldRfid.getText().equals("")){
+            txtFieldRfid.setText("RFID");
+            txtFieldRfid.setForeground(new Color(102,102,102));
+        }
     }//GEN-LAST:event_txtFieldRfidFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

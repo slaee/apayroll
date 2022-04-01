@@ -4,7 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/MainFrame.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/Employee.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/components/Form.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/EmployeePanel.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/libcore/Database.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/EmployeeRoster.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/bootstrap/Main.java</file>
         </group>
     </open-files>

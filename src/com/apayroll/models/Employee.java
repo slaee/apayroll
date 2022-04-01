@@ -1,7 +1,5 @@
 package com.apayroll.models;
 
-
-
 public abstract class Employee {
 
     /**
