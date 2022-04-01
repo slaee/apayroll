@@ -102,8 +102,11 @@ public class EmployeePanel extends javax.swing.JPanel {
         });
         card5.add(addEmployeeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 130, 40));
 
+        scrollTablePane.setBackground(new java.awt.Color(255, 255, 255));
         scrollTablePane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        scrollTablePane.setOpaque(false);
 
+        table.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

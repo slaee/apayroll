@@ -7,7 +7,7 @@ package com.apayroll.models;
 
 import com.apayroll.libcore.Database;
 import java.sql.SQLException;
-import java.util.Vector;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class EmployeeRoster {
     Database db;
-    Vector<Employee> employee;
+    List<Employee> employee;
     
     public EmployeeRoster(){
         db = new Database();
@@ -86,6 +86,4 @@ public class EmployeeRoster {
         }
         return false;
     }
-
-
 }
