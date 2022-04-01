@@ -6,6 +6,7 @@
 package com.apayroll.swing;
 
 import com.apayroll.models.components.ButtonType;
+import com.apayroll.models.components.EmployeeTableModel;
 //import com.apayroll.swing.renderers.ButtonEditor;
 import java.awt.Color;
 import java.awt.Component;
@@ -72,23 +73,24 @@ public class TableWithButton extends JTable{
         getColumn(columnName).setCellEditor(new DefaultCellEditor(new JTextField()) {
             protected TableButton btn = new TableButton();
             private Boolean clicked;
-            private String selectedData;
-
+            private Long selectedId;
+            private int selectedRow;
             {
                 btn.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         clicked = true;
-                        selectedData = (String) getCellEditorValue();
+                        selectedId = (Long) getCellEditorValue();
                         stopCellEditing();
-                        ((DefaultTableModel) getModel()).removeRow(getSelectedRow());
+                        ((EmployeeTableModel) getModel()).removeRow(selectedId, selectedRow);
                     }
                 });
             }
             
             @Override
             public Component getTableCellEditorComponent(JTable table, Object obj, boolean selected, int row, int col) {
-                selectedData = (String) table.getValueAt(row, 0);
+                selectedId = (Long) table.getValueAt(row, 0);
+                selectedRow = row;
                 btn.setButtonType(ButtonType.DELETE);
                 clicked = true;
                 return btn;
@@ -97,10 +99,10 @@ public class TableWithButton extends JTable{
             @Override
             public Object getCellEditorValue() {
                 if(clicked) {
-                    JOptionPane.showMessageDialog(btn, "Deleted "+ selectedData);
+                    JOptionPane.showMessageDialog(btn, "Deleted "+ selectedId);
                 }
                 clicked = false;
-                return selectedData;
+                return selectedId;
             }
     
             @Override

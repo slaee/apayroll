@@ -209,15 +209,15 @@ public class Form extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         // TODO add your handling code here:
         EmployeeRoster er = new EmployeeRoster();
-        String id = txtFieldRfid.getText();
+        String rfid = txtFieldRfid.getText();
         String firstName = txtFieldFirstName.getText();
         String middleName = txtFieldMiddleName.getText();
         String lastName = txtFieldLastName.getText();
         String errorMessage;
-        if(!firstName.equals("") && !lastName.equals("") && !id.equals("")){
+        if(!firstName.equals("") && !lastName.equals("") && !rfid.equals("")){
             if(enumEmployee.getSelectedItem() == EmployeeType.REGULAR_EMPLOYEE){
                 RegularEmployee re = new RegularEmployee();
-                re.setId(id);
+                re.setRfid(rfid);
                 re.setFirstName(firstName);
                 re.setMiddleName(middleName);
                 re.setLastName(lastName);
@@ -232,7 +232,7 @@ public class Form extends javax.swing.JFrame {
                 }
             } else {
                 HourlyEmployee he = new HourlyEmployee();
-                he.setId(id);
+                he.setRfid(rfid);
                 he.setFirstName(firstName);
                 he.setMiddleName(middleName);
                 he.setLastName(lastName);

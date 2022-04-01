@@ -32,7 +32,7 @@ public class EmployeeRoster {
             db.bind(3, emp.getLastName());
             db.bind(4, emp.getType().toString());
             db.execute();
-            if(!doInsertRfid(emp.getId())){
+            if(!doInsertRfid(emp.getRfid())){
                 db.rollBack();
             }
             return true;
@@ -60,10 +60,10 @@ public class EmployeeRoster {
         return db.getLastInsertId();
     }
 
-    public boolean removeEmployee(Employee emp){
+    public boolean removeEmployee(long id){
         try {
             db.query("DELETE FROM dbb_employee WHERE id = ?", true);
-            db.bind(1, emp.getId());
+            db.bind(1, id);
             db.execute();
             return true;
         } catch (SQLException e){
@@ -96,7 +96,7 @@ public class EmployeeRoster {
             while(res.next()){
                 if(EmployeeType.valueOf(res.getString("employeeType")) == EmployeeType.HOURLY_EMPLOYEE){
                     HourlyEmployee he = new HourlyEmployee();
-                    he.setId(res.getString("user_rfid_number"));
+                    he.setId(res.getLong("e.id"));
                     he.setFirstName(res.getString("firstName"));
                     he.setMiddleName(res.getString("middleName"));
                     he.setLastName(res.getString("lastName"));
@@ -104,7 +104,7 @@ public class EmployeeRoster {
                     employeeList.add(he);
                 } else {
                     RegularEmployee re = new RegularEmployee();
-                    re.setId(res.getString("user_rfid_number"));
+                    re.setId(res.getLong("e.id"));
                     re.setFirstName(res.getString("firstName"));
                     re.setMiddleName(res.getString("middleName"));
                     re.setLastName(res.getString("lastName"));

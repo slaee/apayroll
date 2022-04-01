@@ -44,8 +44,8 @@ public class EmployeeDTR extends Employee{
     private Timestamp timeIn;
     private Timestamp timeOut;
     
-    public EmployeeDTR(String id, String firstName, String middleName, String lastName, EmployeeType type, Timestamp timeIn, Timestamp timeOut){
-        super(id, firstName, middleName, lastName, type);
+    public EmployeeDTR(Long id, String rfid, String firstName, String middleName, String lastName, EmployeeType type, Timestamp timeIn, Timestamp timeOut){
+        super(id, rfid, firstName, middleName, lastName, type);
         this.timeIn = timeIn;
         this.timeOut = timeOut;
     }

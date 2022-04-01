@@ -32,15 +32,11 @@ public class EmployeePanel extends javax.swing.JPanel {
     public EmployeePanel() {
         db = new Database();
         initComponents();
-        try {
-            startFetchData();
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initTableWithButton();
         scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
     
-    public void startFetchData() throws SQLException{
+    public void initTableWithButton(){
         EmployeeRoster er = new EmployeeRoster();
         er.updateList();
         table.setModel(new EmployeeTableModel(er.getEmployeeList()));

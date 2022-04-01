@@ -6,6 +6,7 @@
 package com.apayroll.models.components;
 
 import com.apayroll.models.Employee;
+import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -59,13 +60,20 @@ public class EmployeeTableModel extends AbstractTableModel{
     }
     
     @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex){
+        return true;
+    }
+    
+    @Override
     public String getColumnName(int col){
         return columnNames[col];
     }
     
+    @Override
     public Class getColumnClass(int col){
         switch(col){
             case 0:
+                return Long.class;
             case 1:
             case 2:
             case 3:
@@ -76,5 +84,11 @@ public class EmployeeTableModel extends AbstractTableModel{
                 return ButtonType.class;
         }
         return null;
+    }
+
+    public boolean removeRow(long id, int row) {
+        EmployeeRoster re = new EmployeeRoster();
+        fireTableRowsDeleted(row, row);
+        return re.removeEmployee(id);
     }
 }
