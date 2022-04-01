@@ -10,20 +10,23 @@ import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
 import com.apayroll.models.HourlyEmployee;
 import com.apayroll.models.RegularEmployee;
+import com.apayroll.models.components.EmployeeTableModel;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author sly
  */
 public class Form extends javax.swing.JFrame {
-
+    JTable employeeTable;
     /** Creates new form Form */
-    public Form() {
+    public Form(JTable employeeTable) {
         initComponents();
         enumEmployee.setModel(new DefaultComboBoxModel(EmployeeType.values()));
+        this.employeeTable = employeeTable;
     }
 
     /** This method is called from within the constructor to
@@ -207,8 +210,7 @@ public class Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        // TODO add your handling code here:
-        EmployeeRoster er = new EmployeeRoster();
+        // TODO add your handling code here
         String rfid = txtFieldRfid.getText();
         String firstName = txtFieldFirstName.getText();
         String middleName = txtFieldMiddleName.getText();
@@ -222,7 +224,7 @@ public class Form extends javax.swing.JFrame {
                 re.setMiddleName(middleName);
                 re.setLastName(lastName);
                 re.setType((EmployeeType) enumEmployee.getSelectedItem());
-                if(er.addEmployee(re)){
+                if(((EmployeeTableModel) employeeTable.getModel()).addRow(re)){
                     errorMessage = "Employee Added";
                     txtFieldFirstName.setText("First name");
                     txtFieldMiddleName.setText("Middle name");
@@ -237,7 +239,7 @@ public class Form extends javax.swing.JFrame {
                 he.setMiddleName(middleName);
                 he.setLastName(lastName);
                 he.setType((EmployeeType) enumEmployee.getSelectedItem());
-                if(er.addEmployee(he)){
+                if(((EmployeeTableModel) employeeTable.getModel()).addRow(he)){
                    errorMessage = "Employee Added";
                     txtFieldFirstName.setText("First name");
                     txtFieldMiddleName.setText("Middle name");
@@ -250,6 +252,7 @@ public class Form extends javax.swing.JFrame {
         } else {
             errorMessage = "Employee add unsuccessfull";
         }
+ 
         JOptionPane.showMessageDialog(submitBtn, errorMessage);
     }//GEN-LAST:event_submitBtnActionPerformed
 

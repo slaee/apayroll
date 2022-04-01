@@ -7,7 +7,6 @@ package com.apayroll.swing;
 
 import com.apayroll.models.components.ButtonType;
 import com.apayroll.models.components.EmployeeTableModel;
-//import com.apayroll.swing.renderers.ButtonEditor;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -18,7 +17,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author sly
@@ -38,6 +36,7 @@ public class TableWithButton extends JTable{
                 return header;
             }
         });
+        
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int row, int col){
@@ -67,9 +66,7 @@ public class TableWithButton extends JTable{
         });
     }
     
-    
     public void setCellNotEditorColumn(String columnName){
-//        getColumn(columnName).setCellEditor(new ButtonEditor(new JTextField()));
         getColumn(columnName).setCellEditor(new DefaultCellEditor(new JTextField()) {
             protected TableButton btn = new TableButton();
             private Boolean clicked;
@@ -83,7 +80,6 @@ public class TableWithButton extends JTable{
                         selectedId = (Long) getCellEditorValue();
                         stopCellEditing();
                         ((EmployeeTableModel) getModel()).removeRow(selectedId, selectedRow);
-//                        ((DefaultTableModel) getModel()).removeRow(selectedRow);
                     }
                 });
             }
@@ -108,7 +104,7 @@ public class TableWithButton extends JTable{
     
             @Override
             public boolean stopCellEditing() {
-            //SET CLICKED TO FALSE FIRST
+                //SET CLICKED TO FALSE FIRST
                 clicked = false;
                 return super.stopCellEditing();
             }

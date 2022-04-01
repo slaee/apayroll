@@ -14,6 +14,8 @@ import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author sly
+ * 
+ * This class will simply do the CRUD method upon manipulating data in the views;
  */
 public class EmployeeTableModel extends AbstractTableModel{
     private String columnNames[] = {"Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"};
@@ -34,23 +36,23 @@ public class EmployeeTableModel extends AbstractTableModel{
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object getValueAt(int row, int col) {
         Object data = null;
-        switch(columnIndex){
+        switch(col){
             case 0:
-                data = employeeList.get(rowIndex).getId();
+                data = employeeList.get(row).getId();
                 break;
             case 1:
-                data = employeeList.get(rowIndex).getFirstName();
+                data = employeeList.get(row).getFirstName();
                 break;
             case 2:
-                data = employeeList.get(rowIndex).getMiddleName();
+                data = employeeList.get(row).getMiddleName();
                 break;
             case 3:
-                data = employeeList.get(rowIndex).getLastName();
+                data = employeeList.get(row).getLastName();
                 break;
             case 4:
-                data = employeeList.get(rowIndex).getType();
+                data = employeeList.get(row).getType();
                 break;
             case 5:
                 data = ButtonType.DELETE;
@@ -60,8 +62,8 @@ public class EmployeeTableModel extends AbstractTableModel{
     }
     
     @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex){
-        return true;
+    public boolean isCellEditable(int row, int col){
+        return !(col == 0 || col == 4);
     }
     
     @Override
@@ -85,7 +87,42 @@ public class EmployeeTableModel extends AbstractTableModel{
         }
         return null;
     }
-
+    
+    // Update Employee
+    @Override
+    public void setValueAt(Object value, int row, int col){
+        Employee e = employeeList.get(row);
+        switch(col){
+            case 1:
+                e.setFirstName((String) value);
+                break;
+              
+            case 2:
+                e.setMiddleName((String) value);
+                break;
+            case 3:
+                e.setLastName((String) value);
+                break;
+        }
+        employeeList.set(row, e);
+        EmployeeRoster er = new EmployeeRoster();
+        er.updateEmployee(e);
+        fireTableCellUpdated(row, col);
+    }
+    
+    // Add Employee
+    public boolean addRow(Employee employee){
+        EmployeeRoster er = new EmployeeRoster();
+        if(er.addEmployee(employee)){
+            employee.setId(er.getLastInsertId());
+            employeeList.add(employee);
+            fireTableDataChanged();
+            return true;
+        }
+        return false;
+    }
+    
+    // Remove Employee
     public boolean removeRow(long id, int index) {
         EmployeeRoster er = new EmployeeRoster();
         boolean isRemoved = false;

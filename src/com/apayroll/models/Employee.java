@@ -85,6 +85,13 @@ public abstract class Employee {
     public void setType(EmployeeType type) {
         this.type = type;
     }
+    
+    @Override
+    public String toString(){
+        return "First Name: "+firstName
+               +"Middle Name: "+middleName
+               +"Last Name: "+lastName;
+    }
 
     private Long id;
     private String rfid;
@@ -107,4 +114,5 @@ public abstract class Employee {
     }
     
     public abstract void computeSalary();
+    
 }

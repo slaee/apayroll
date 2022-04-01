@@ -8,17 +8,8 @@ package com.apayroll.views.main;
 import com.apayroll.components.Form;
 import com.apayroll.libcore.Database;
 import com.apayroll.models.EmployeeRoster;
-import com.apayroll.models.components.ButtonType;
 import com.apayroll.models.components.EmployeeTableModel;
 import com.apayroll.swing.ScrollBarCustom;
-import com.apayroll.swing.renderers.ButtonEditor;
-import com.apayroll.swing.renderers.ButtonRenderer;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTextField;
 
 /**
  *
@@ -36,7 +27,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
     
-    public void initTableWithButton(){
+    private void initTableWithButton(){
         EmployeeRoster er = new EmployeeRoster();
         er.updateList();
         table.setModel(new EmployeeTableModel(er.getEmployeeList()));
@@ -109,7 +100,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
         // TODO add your handling code here:
-        Form addEmployeeForm = new Form();
+        Form addEmployeeForm = new Form(table);
         addEmployeeForm.show();
     }//GEN-LAST:event_addEmployeeBtnActionPerformed
 
