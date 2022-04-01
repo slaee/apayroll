@@ -13,16 +13,15 @@ import javax.swing.JTextField;
 
 public class ButtonEditor extends DefaultCellEditor{
     protected TableButton btn;
-    private String lbl;
     private Boolean clicked;
     private static String selectedData;
 
     public ButtonEditor(JTextField txt) {
         super(txt);
         if("DELETE".equals(txt.getText())){
-            btn= new TableButton(ButtonType.DELETE);
+            btn= new TableButton();
         } else {
-            btn = new TableButton(ButtonType.EDIT);
+            btn = new TableButton();
         }
         
         btn.setOpaque(true);
@@ -36,9 +35,8 @@ public class ButtonEditor extends DefaultCellEditor{
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object obj, boolean selected, int row, int col) {
-        lbl = (obj==null) ? "" : obj.toString();
-        btn.setText(lbl);
         selectedData = (String) table.getValueAt(row, 0);
+        btn.setButtonType(ButtonType.DELETE);
         clicked = true;
         return btn;
     }
@@ -49,19 +47,17 @@ public class ButtonEditor extends DefaultCellEditor{
     
     @Override
     public Object getCellEditorValue() {
-        if(clicked)
-        {
-            JOptionPane.showMessageDialog(btn, lbl+" Clicked");
+        if(clicked) {
+            JOptionPane.showMessageDialog(btn, "Deleted "+ selectedData);
         }
         clicked = false;
-        return new String(lbl);
+        return selectedData;
     }
     
     @Override
     public boolean stopCellEditing() {
-
-         //SET CLICKED TO FALSE FIRST
-        clicked=false;
+        //SET CLICKED TO FALSE FIRST
+        clicked = false;
         return super.stopCellEditing();
     }
 

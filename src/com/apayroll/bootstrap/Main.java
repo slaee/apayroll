@@ -13,8 +13,6 @@ import java.sql.SQLException;
  * @author sly
  */
 public class Main {
-    
-    
     public static void main(String[] args) throws SQLException{
         MainFrame main = new MainFrame();
         main.setVisible(true);

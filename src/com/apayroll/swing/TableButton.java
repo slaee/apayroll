@@ -31,30 +31,14 @@ public class TableButton extends JButton{
      */
     public void setButtonType(ButtonType buttonType) {
         this.buttonType = buttonType;
+        setText(buttonType.toString());
         repaint();
     }
     
     private ButtonType buttonType;
     
-    public TableButton(ButtonType buttonType){
-        this.buttonType = buttonType;
-        if(null == buttonType){
-            setText("");
-        } else switch (buttonType) {
-            case DELETE:
-                setText("Delete");
-                break;
-            case EDIT:
-                setText("Edit");
-                break;
-            default:
-                setText("View");
-                break;
-        }
-    }
-    
     public TableButton(){
-        
+        setForeground(Color.BLACK);
     }
    
     
@@ -77,7 +61,7 @@ public class TableButton extends JButton{
                 break;
         }
         gr2D.setPaint(gp);
-        gr2D.fillRoundRect(0,0, getWidth(), getHeight(), 0, 0);
+        gr2D.fillRoundRect(0,0, getWidth(), getHeight(), 10, 10);
         super.paintComponent(gr);
         
     }

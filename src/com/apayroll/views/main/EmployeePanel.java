@@ -7,6 +7,8 @@ package com.apayroll.views.main;
 
 import com.apayroll.components.Form;
 import com.apayroll.libcore.Database;
+import com.apayroll.models.components.ButtonType;
+import com.apayroll.swing.ScrollBarCustom;
 import com.apayroll.swing.renderers.ButtonEditor;
 import com.apayroll.swing.renderers.ButtonRenderer;
 import java.sql.SQLException;
@@ -33,6 +35,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
     
      public void startFetchData() throws SQLException{
@@ -48,6 +51,11 @@ public class EmployeePanel extends javax.swing.JPanel {
 //            table.getColumn("Action").setCellRenderer(new ButtonRenderer());
 //            table.getColumn("Action").setCellEditor(new ButtonEditor(new JTextField()));
 //        }
+        table.addRow(new Object[] {"APC-242", "John", "Drake", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+        table.setCellNotEditorColumn("Action");
     }
 
     /**
@@ -63,7 +71,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         addEmployeeBtn = new javax.swing.JButton();
         scrollTablePane = new javax.swing.JScrollPane();
-        table = new com.apayroll.swing.Table();
+        table = new com.apayroll.swing.TableWithButton();
 
         setBackground(new java.awt.Color(248, 249, 250));
         setPreferredSize(new java.awt.Dimension(970, 770));
@@ -94,30 +102,19 @@ public class EmployeePanel extends javax.swing.JPanel {
         });
         card5.add(addEmployeeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 130, 40));
 
-        scrollTablePane.setBackground(new java.awt.Color(255, 255, 255));
         scrollTablePane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Employee ID", "First name", "Middle name", "Last name", "Type", "Action"
+                "Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"
             }
         ));
         scrollTablePane.setViewportView(table);
-        if (table.getColumnModel().getColumnCount() > 0) {
-            table.getColumnModel().getColumn(0).setResizable(false);
-            table.getColumnModel().getColumn(1).setResizable(false);
-            table.getColumnModel().getColumn(3).setResizable(false);
-            table.getColumnModel().getColumn(5).setResizable(false);
-            table.getColumnModel().getColumn(5).setPreferredWidth(50);
-        }
 
-        card5.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 880, 610));
+        card5.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 600));
 
         add(card5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 960, 750));
     }// </editor-fold>//GEN-END:initComponents
@@ -134,6 +131,6 @@ public class EmployeePanel extends javax.swing.JPanel {
     private com.apayroll.components.Card card5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane scrollTablePane;
-    private com.apayroll.swing.Table table;
+    private com.apayroll.swing.TableWithButton table;
     // End of variables declaration//GEN-END:variables
 }
