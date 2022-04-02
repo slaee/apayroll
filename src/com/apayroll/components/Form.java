@@ -6,7 +6,6 @@
 
 package com.apayroll.components;
 
-import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
 import com.apayroll.models.HourlyEmployee;
 import com.apayroll.models.RegularEmployee;
@@ -208,7 +207,7 @@ public class Form extends javax.swing.JFrame {
         // TODO add your handling code here
         String rfid = txtFieldRfid.getText();
         String firstName = txtFieldFirstName.getText();
-        String middleName = txtFieldMiddleName.getText();
+        String middleName = txtFieldMiddleName.getText().equals("Middle name") ? "" : txtFieldMiddleName.getText();
         String lastName = txtFieldLastName.getText();
         String errorMessage;
         if(!firstName.equals("") && !lastName.equals("") && !rfid.equals("")){

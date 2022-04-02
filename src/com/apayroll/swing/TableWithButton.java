@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.apayroll.swing;
-
 import com.apayroll.models.components.ButtonType;
 import com.apayroll.models.components.EmployeeTableModel;
 import java.awt.Color;
@@ -23,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
  * @author sly
  */
 public class TableWithButton extends JTable{
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public TableWithButton() {
         setShowHorizontalLines(true);
         setShowVerticalLines(false);
         setGridColor(new Color(230, 230, 230));
-//        setOpaque(false);
+        setOpaque(false);
         setRowHeight(40);
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer(){

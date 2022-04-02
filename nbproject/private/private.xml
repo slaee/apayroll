@@ -5,6 +5,8 @@
         <group>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/MainFrame.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/Employee.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/swing/TableWithButton.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/components/EmployeeTableModel.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/components/Form.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/EmployeePanel.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/libcore/Database.java</file>

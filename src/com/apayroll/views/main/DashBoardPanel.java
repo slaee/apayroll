@@ -47,25 +47,7 @@ public class DashBoardPanel extends javax.swing.JPanel {
     }
     
     public void startFetchData() throws SQLException{
-//        db.query("SELECT r.user_rfid_number, e.firstName, e.middleName, e.lastName, e.employeeType, dtr.timeIn, dtr.timeOut "
-//                + "FROM dbb_employee e "
-//                + "LEFT JOIN dbb_dtr_record dtr ON dtr.employeeId = e.id "
-//                + "LEFT JOIN dbb_rfid r ON r.user_id = e.id");
-//        db.execute();
-//        
-//        Vector<EmployeeDTR> eDTR;
-//       
-//        for (Iterator<Object> it = db.fetchDataObjects().iterator(); it.hasNext();) {
-//            Vector<Object> o = (Vector<Object>) it.next();
-//            EmployeeDTR edtr = new EmployeeDTR();
-//            edtr.setId((String) o.get(0));
-//            edtr.setFirstName((String) o.get(1));
-//            edtr.setMiddleName((String) o.get(2));
-//            edtr.setLastName((String) o.get(3));
-//            edtr.setTimeIn((Timestamp) o.get(5));
-//            edtr.setTimeOut((Timestamp) o.get(6));
-//            table.addRow(new Object[] {o.get(0), o.get(1)+" "+o.get(2)+" "+o.get(3), o.get(5), o.get(6)});
-//        }
+        
     }
 
     /**
