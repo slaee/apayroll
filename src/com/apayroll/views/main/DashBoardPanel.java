@@ -7,15 +7,9 @@ package com.apayroll.views.main;
 
 import com.apayroll.chart.ModelChart;
 import com.apayroll.libcore.Database;
-import com.apayroll.models.EmployeeDTR;
+import com.apayroll.models.EmployeeRoster;
 import com.apayroll.swing.ScrollBarCustom;
 import java.awt.Color;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Iterator;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,12 +23,6 @@ public class DashBoardPanel extends javax.swing.JPanel {
     public DashBoardPanel() {
         db = new Database();
         initComponents();
-        try {
-            startFetchData();
-        } catch (SQLException ex) {
-            Logger.getLogger(DashBoardPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         lineChart.addLegend("Total Net pay per month", Color.decode("#38B6FF"), Color.decode("#38B6FF"));
         lineChart.addLegend("Total Gross pay per month", Color.decode("#004AAD"), Color.decode("#004AAD"));
         lineChart.addData(new ModelChart("Jan", new double[]{5015, 89124}));
@@ -42,12 +30,11 @@ public class DashBoardPanel extends javax.swing.JPanel {
         lineChart.addData(new ModelChart("Mar", new double[]{50125, 90893}));
         lineChart.addData(new ModelChart("Apr", new double[]{51250, 26356}));
         lineChart.start();
-        
         scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
-    }
-    
-    public void startFetchData() throws SQLException{
         
+        EmployeeRoster er = new EmployeeRoster();
+        er.updateList();
+        labelTotalEmployee.setText(er.size()+" / 500");
     }
 
     /**
@@ -66,9 +53,11 @@ public class DashBoardPanel extends javax.swing.JPanel {
         card4 = new com.apayroll.components.Card();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        labelTotalEmployee = new javax.swing.JLabel();
         card3 = new com.apayroll.components.Card();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lablePayrolReleaseDate = new javax.swing.JLabel();
         card1 = new com.apayroll.components.Card();
         lineChart = new com.apayroll.chart.LineChart();
 
@@ -147,6 +136,10 @@ public class DashBoardPanel extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/apayroll/views/img/employee32x32.png"))); // NOI18N
         card4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
+        labelTotalEmployee.setFont(new java.awt.Font("FreeSans", 1, 20)); // NOI18N
+        labelTotalEmployee.setText("0");
+        card4.add(labelTotalEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
         add(card4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 330, 140));
 
         card3.setBackground(new java.awt.Color(255, 255, 255));
@@ -159,11 +152,15 @@ public class DashBoardPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Lato Light", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("Next payroll release date");
+        jLabel3.setText("Payroll release date");
         card3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 23, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/apayroll/views/img/calendar32x32.png"))); // NOI18N
         card3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+
+        lablePayrolReleaseDate.setFont(new java.awt.Font("FreeSans", 1, 20)); // NOI18N
+        lablePayrolReleaseDate.setText("---");
+        card3.add(lablePayrolReleaseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         add(card3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 330, 140));
 
@@ -190,6 +187,8 @@ public class DashBoardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelTotalEmployee;
+    private javax.swing.JLabel lablePayrolReleaseDate;
     private com.apayroll.chart.LineChart lineChart;
     private javax.swing.JScrollPane scrollTablePane;
     private com.apayroll.swing.Table table;

@@ -16,14 +16,14 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException, InterruptedException{
         MainFrame main = new MainFrame();
-        SplashScreenFrame sc = new SplashScreenFrame();
+//        SplashScreenFrame sc = new SplashScreenFrame();
         
-        sc.setVisible(true);
-        for(int i = 0; i < 100; i++) {
-            Thread.sleep(40);
-        }
-        sc.setVisible(false);
+//        sc.setVisible(true);
+//        for(int i = 0; i < 100; i++) {
+//            Thread.sleep(40);
+//        }
+//        sc.setVisible(false);
         main.setVisible(true);
-        sc.dispose();
+//        sc.dispose();
     }
 }
