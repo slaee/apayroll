@@ -6,6 +6,7 @@
 package com.apayroll.models.components;
 
 import com.apayroll.models.Employee;
+import com.apayroll.models.EmployeeDTR;
 import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
 import java.util.ArrayList;
@@ -14,20 +15,18 @@ import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author sly
- * 
- * This class will simply do the CRUD method upon manipulating data in the views;
  */
-public class EmployeeTableModel extends AbstractTableModel{
-    private final String columnNames[] = {"Employee ID", "RFID Number", "First Name", "Middle Name", "Last Name", "Type", "Action"};
-    private ArrayList<Employee> employeeList;
+public class DTRTableModel extends AbstractTableModel{
+    private final String columnNames[] = { "Employee ID",  "Name", "Time in", "Time out"};
+    private ArrayList<EmployeeDTR> dtrList;
     
-    public EmployeeTableModel(ArrayList<Employee> employeeList){
-        this.employeeList = employeeList;
+    public DTRTableModel(ArrayList<EmployeeDTR> dtrList){
+        this.dtrList = dtrList;
     }
     
     @Override
     public int getRowCount() {
-        return employeeList.size();
+        return dtrList.size();
     }
 
     @Override
@@ -40,25 +39,16 @@ public class EmployeeTableModel extends AbstractTableModel{
         Object data = null;
         switch(col){
             case 0:
-                data = employeeList.get(row).getId();
+                data = dtrList.get(row).getId();
                 break;
             case 1:
-                data = employeeList.get(row).getRfid();
+                data = dtrList.get(row).getFullName();
                 break;
             case 2:
-                data = employeeList.get(row).getFirstName();
+                data = dtrList.get(row).getTimeIn();
                 break;
             case 3:
-                data = employeeList.get(row).getMiddleName();
-                break;
-            case 4:
-                data = employeeList.get(row).getLastName();
-                break;
-            case 5:
-                data = employeeList.get(row).getType();
-                break;
-            case 6:
-                data = ButtonType.DELETE;
+                data = dtrList.get(row).getTimeOut();
                 break;
         }
         return data;
@@ -66,7 +56,7 @@ public class EmployeeTableModel extends AbstractTableModel{
     
     @Override
     public boolean isCellEditable(int row, int col){
-        return !(col == 0 || col == 5);
+        return !(col == 0 || col == 4);
     }
     
     @Override
@@ -82,11 +72,10 @@ public class EmployeeTableModel extends AbstractTableModel{
             case 1:
             case 2:
             case 3:
-            case 4:
                 return String.class;
-            case 5:
+            case 4:
                 return EmployeeType.class;
-            case 6:
+            case 5:
                 return ButtonType.class;
         }
         return null;
@@ -95,48 +84,34 @@ public class EmployeeTableModel extends AbstractTableModel{
     // Update Employee
     @Override
     public void setValueAt(Object value, int row, int col){
-        Employee e = employeeList.get(row);
+        EmployeeDTR e = dtrList.get(row);
         switch(col){
             case 1:
-                e.setRfid((String) value);
-                break;
-            case 2:
                 e.setFirstName((String) value);
                 break;
-            case 3:
+              
+            case 2:
                 e.setMiddleName((String) value);
                 break;
-            case 4:
+            case 3:
                 e.setLastName((String) value);
                 break;
         }
-        employeeList.set(row, e);
+        dtrList.set(row, e);
         EmployeeRoster er = new EmployeeRoster();
         er.updateEmployee(e);
         fireTableCellUpdated(row, col);
     }
     
     // Add Employee
-    public boolean addRow(Employee employee){
+    public boolean addRow(EmployeeDTR employee){
         EmployeeRoster er = new EmployeeRoster();
         if(er.addEmployee(employee)){
             employee.setId(er.getLastInsertId());
-            employeeList.add(employee);
+            dtrList.add(employee);
             fireTableDataChanged();
             return true;
         }
         return false;
-    }
-    
-    // Remove Employee
-    public boolean removeRow(long id, int index) {
-        EmployeeRoster er = new EmployeeRoster();
-        boolean isRemoved = false;
-        if(er.removeEmployee(id))
-            isRemoved = true;
-        
-        employeeList.remove(index);
-        fireTableRowsDeleted(index, index);
-        return isRemoved;
     }
 }

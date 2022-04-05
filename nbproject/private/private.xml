@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/components/PayrollTableModel.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/swing/DTRTable.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/components/DTRTableModel.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/EmployeeDTR.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/DashBoardPanel.java</file>
-            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/MainFrame.java</file>
-            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/PayrollPanel.java</file>
-            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/swing/TableWithButton.java</file>
+            <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/Employee.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/models/components/EmployeeTableModel.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/views/main/EmployeePanel.java</file>
             <file>file:/home/sly/NetBeansProjects/apayroll/src/com/apayroll/swing/Table.java</file>

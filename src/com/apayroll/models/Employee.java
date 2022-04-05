@@ -86,11 +86,17 @@ public abstract class Employee {
         this.type = type;
     }
     
+    public String getFullName(){
+        return firstName+" "+middleName+" "+lastName;
+    }
+    
     @Override
     public String toString(){
-        return "First Name: "+firstName
-               +"Middle Name: "+middleName
-               +"Last Name: "+lastName;
+        return "ID: "+ id
+                +"\nRFID: " +rfid
+                +"\nFirst Name: "+firstName
+               +"\nMiddle Name: "+middleName
+               +"\nLast Name: "+lastName;
     }
 
     private Long id;

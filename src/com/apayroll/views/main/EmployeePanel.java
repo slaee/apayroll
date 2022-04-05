@@ -7,6 +7,7 @@ package com.apayroll.views.main;
 
 import com.apayroll.components.Form;
 import com.apayroll.libcore.Database;
+import com.apayroll.models.Employee;
 import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.components.EmployeeTableModel;
 import com.apayroll.swing.ScrollBarCustom;
@@ -88,7 +89,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"
+                "Employee ID", "RFID No.", "First Name", "Middle Name", "Last Name", "Type", "Action"
             }
         ));
         scrollTablePane.setViewportView(table);

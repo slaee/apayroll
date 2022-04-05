@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 public class EmployeeRoster {
     Database db;
     static ArrayList<Employee> employeeList;
+    static ArrayList<Employee> DTR_Record;
     
     public EmployeeRoster(){
         db = new Database();
@@ -40,6 +41,45 @@ public class EmployeeRoster {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public boolean timeIn(EmployeeDTR dtr){
+        try {
+            db.query("INSERT INTO dbb_dtr_record (employeeId, timeIn) VALUES (?, ?)", true);
+            db.bind(1, dtr.getId());
+            db.bind(2, dtr.getTimeIn());
+            return true;
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean timeOut(EmployeeDTR dtr){
+        try {
+            db.query("INSERT INTO dbb_dtr_record (employeeId, timeOut) VALUES (?, ?)", true);
+            db.bind(1, dtr.getId());
+            db.bind(2, dtr.getTimeOut());
+            return true;
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Long getEmployeeIdByRFID(String rfid){
+        try{
+            db.query("SElECT user_id FROM dbb_rfid WHERE = ?");
+            db.bind(1, rfid);
+            db.execute();
+            ResultSet res = db.getResultSet();
+            if(res.next()){
+                return res.getLong(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return -1L;
     }
     
     private boolean doInsertRfid(String rfid){
@@ -80,7 +120,12 @@ public class EmployeeRoster {
             db.bind(3, emp.getLastName());
             db.bind(4, emp.getType().toString());
             db.bind(5, emp.getId());
-            db.execute();
+            if(db.execute()){
+                db.query("UPDATE dbb_rfid SET user_rfid_number = ? WHERE user_id = ?", true);
+                db.bind(1, emp.getRfid());
+                db.bind(2, emp.getId());
+                db.execute();
+            }
             return true;
         } catch (SQLException e){
             e.printStackTrace();
@@ -98,6 +143,7 @@ public class EmployeeRoster {
                 if(EmployeeType.valueOf(res.getString("employeeType")) == EmployeeType.HOURLY_EMPLOYEE){
                     HourlyEmployee he = new HourlyEmployee();
                     he.setId(res.getLong("e.id"));
+                    he.setRfid(res.getString("r.user_rfid_number"));
                     he.setFirstName(res.getString("firstName"));
                     he.setMiddleName(res.getString("middleName"));
                     he.setLastName(res.getString("lastName"));
@@ -106,6 +152,7 @@ public class EmployeeRoster {
                 } else {
                     RegularEmployee re = new RegularEmployee();
                     re.setId(res.getLong("e.id"));
+                    re.setRfid(res.getString("r.user_rfid_number"));
                     re.setFirstName(res.getString("firstName"));
                     re.setMiddleName(res.getString("middleName"));
                     re.setLastName(res.getString("lastName"));
@@ -114,6 +161,27 @@ public class EmployeeRoster {
                 }
             }
         } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateDTR_Record(){
+        DTR_Record = new ArrayList();
+        try{
+            db.query("Select employee.*, dtr.* FROM dbb_employee employee LEFT JOIN dbb_dtr_record dtr ON dtr.employeeId = employee.id");
+            db.execute();
+            ResultSet res = db.getResultSet();
+            while(res.next()){
+                EmployeeDTR edtr = new EmployeeDTR();
+                edtr.setId(res.getLong("employee.dtr"));
+                edtr.setFirstName(res.getString("firstName"));
+                edtr.setMiddleName(res.getString("middleName"));
+                edtr.setLastName(res.getString("lastName"));
+                edtr.setTimeIn(res.getTimestamp("timeIn"));
+                edtr.setTimeOut(res.getTimestamp("timeout"));
+                DTR_Record.add(edtr);
+            }
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }

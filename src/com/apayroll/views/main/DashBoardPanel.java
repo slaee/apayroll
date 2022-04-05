@@ -9,7 +9,10 @@ import com.apayroll.chart.ModelChart;
 import com.apayroll.libcore.Database;
 import com.apayroll.models.EmployeeRoster;
 import com.apayroll.swing.ScrollBarCustom;
+import com.apayroll.views.dtr.rfid.RfidScannerFrame;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.awt.Color;
  */
 public class DashBoardPanel extends javax.swing.JPanel {
     Database db;
+    
     /**
      * Creates new form DashBoardPanel
      */
@@ -35,6 +39,14 @@ public class DashBoardPanel extends javax.swing.JPanel {
         EmployeeRoster er = new EmployeeRoster();
         er.updateList();
         labelTotalEmployee.setText(er.size()+" / 500");
+
+        String month;
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM 30, YYYY");
+        month = sdf.format(date);
+        labelPayrolReleaseDate.setText(month);
+        RfidScannerFrame rs = new RfidScannerFrame();
+        rs.setVisible(true);
     }
 
     /**
@@ -49,7 +61,7 @@ public class DashBoardPanel extends javax.swing.JPanel {
         card2 = new com.apayroll.components.Card();
         jLabel1 = new javax.swing.JLabel();
         scrollTablePane = new javax.swing.JScrollPane();
-        table = new com.apayroll.swing.Table();
+        table = new com.apayroll.swing.DTRTable();
         card4 = new com.apayroll.components.Card();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -57,7 +69,7 @@ public class DashBoardPanel extends javax.swing.JPanel {
         card3 = new com.apayroll.components.Card();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lablePayrolReleaseDate = new javax.swing.JLabel();
+        labelPayrolReleaseDate = new javax.swing.JLabel();
         card1 = new com.apayroll.components.Card();
         lineChart = new com.apayroll.chart.LineChart();
 
@@ -80,43 +92,22 @@ public class DashBoardPanel extends javax.swing.JPanel {
 
         scrollTablePane.setBackground(new java.awt.Color(255, 255, 255));
         scrollTablePane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        scrollTablePane.setOpaque(false);
 
+        table.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Time In", "Time Out"
+                "Employee ID", "Name", "Time in", "Time out"
             }
         ));
         scrollTablePane.setViewportView(table);
 
-        card2.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 890, 360));
+        card2.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 880, 350));
 
         add(card2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 960, 490));
 
@@ -158,9 +149,9 @@ public class DashBoardPanel extends javax.swing.JPanel {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/apayroll/views/img/calendar32x32.png"))); // NOI18N
         card3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
-        lablePayrolReleaseDate.setFont(new java.awt.Font("FreeSans", 1, 20)); // NOI18N
-        lablePayrolReleaseDate.setText("---");
-        card3.add(lablePayrolReleaseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        labelPayrolReleaseDate.setFont(new java.awt.Font("FreeSans", 1, 20)); // NOI18N
+        labelPayrolReleaseDate.setText("---");
+        card3.add(labelPayrolReleaseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         add(card3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 330, 140));
 
@@ -187,10 +178,10 @@ public class DashBoardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelPayrolReleaseDate;
     private javax.swing.JLabel labelTotalEmployee;
-    private javax.swing.JLabel lablePayrolReleaseDate;
     private com.apayroll.chart.LineChart lineChart;
     private javax.swing.JScrollPane scrollTablePane;
-    private com.apayroll.swing.Table table;
+    private com.apayroll.swing.DTRTable table;
     // End of variables declaration//GEN-END:variables
 }

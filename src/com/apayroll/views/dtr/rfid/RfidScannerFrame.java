@@ -6,6 +6,10 @@
 
 package com.apayroll.views.dtr.rfid;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author sly
@@ -15,6 +19,14 @@ public class RfidScannerFrame extends javax.swing.JFrame {
     /** Creates new form RfidScannerFrame */
     public RfidScannerFrame() {
         initComponents();
+        this.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowOpened(WindowEvent e){
+                txtFieldRfid.requestFocus();
+            }
+        });
+        
+        SwingUtilities.getRootPane(submit).setDefaultButton(submit);
     }
 
     /** This method is called from within the constructor to
@@ -27,32 +39,44 @@ public class RfidScannerFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        txtFieldRfid = new javax.swing.JTextField();
+        submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/apayroll/views/dtr/rfid/Please Scan your ID.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        txtFieldRfid.setFont(new java.awt.Font("Dialog", 0, 1)); // NOI18N
+        getContentPane().add(txtFieldRfid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 160, 0));
+
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 0, 0));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource() == txtFieldRfid){
+            submit.doClick();
+        }
+        else if (evt.getSource() == submit){
+            System.out.println(txtFieldRfid.getText());
+        }
+        txtFieldRfid.setText("");
+    }//GEN-LAST:event_submitActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton submit;
+    private javax.swing.JTextField txtFieldRfid;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -5,6 +5,7 @@
  */
 package com.apayroll.bootstrap;
 
+import com.apayroll.views.dtr.rfid.RfidScannerFrame;
 import com.apayroll.views.main.MainFrame;
 import com.apayroll.views.splashscreen.SplashScreenFrame;
 import java.sql.SQLException;
@@ -16,6 +17,8 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException, InterruptedException{
         MainFrame main = new MainFrame();
+        
+        
 //        SplashScreenFrame sc = new SplashScreenFrame();
         
 //        sc.setVisible(true);
@@ -24,6 +27,7 @@ public class Main {
 //        }
 //        sc.setVisible(false);
         main.setVisible(true);
+        
 //        sc.dispose();
     }
 }

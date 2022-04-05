@@ -124,19 +124,22 @@ public class Database implements Config{
     }
 
     // execute query
-    public void execute() throws SQLException{
-        if(SQLStatement.toUpperCase().matches(".*\\bSELECT\\b.*")){
-            res = stmt.executeQuery();
-        } else {
-            stmt.executeUpdate();
-            ResultSet res = stmt.getGeneratedKeys();
-            if(res.next()){
-                this.lastInsertedId = res.getLong(1);
+    public boolean execute(){
+        try {
+            if(SQLStatement.toUpperCase().matches(".*\\bSELECT\\b.*")){
+                res = stmt.executeQuery();
+            } else {
+                stmt.executeUpdate();
+                ResultSet rs = stmt.getGeneratedKeys();
+                if(rs.next()){
+                    this.lastInsertedId = rs.getLong(1);
+                }
             }
+            return true;
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
         }
-        
-        stmt = null;
-        SQLStatement = "";
     }
     
     public long getLastInsertId(){

@@ -15,9 +15,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sly
  */
-public class Table extends JTable{
+public class DTRTable extends JTable{
     @SuppressWarnings("OverridableMethodCallInConstructor")
-    public Table() {
+    public DTRTable() {
         setShowHorizontalLines(true);
         setShowVerticalLines(false);
         setGridColor(new Color(230, 230, 230));
@@ -31,7 +31,6 @@ public class Table extends JTable{
                 return header;
             }
         });
-        
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int row, int col){

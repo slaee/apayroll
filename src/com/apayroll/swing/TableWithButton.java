@@ -41,7 +41,7 @@ public class TableWithButton extends JTable{
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int row, int col){
-                if(col != 5){
+                if(!getColumnName(col).equals("Action")){
                     Component com = super.getTableCellRendererComponent(jtable, o, selected, bln1, row, col);
                     com.setBackground(Color.WHITE);
                     setHorizontalAlignment(SwingConstants.LEFT);
@@ -72,6 +72,7 @@ public class TableWithButton extends JTable{
             private Boolean clicked;
             private Long selectedId;
             private int selectedRow;
+            
             {
                 btn.addActionListener(new ActionListener() {
                     @Override
