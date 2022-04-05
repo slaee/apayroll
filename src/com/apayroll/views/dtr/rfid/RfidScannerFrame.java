@@ -6,8 +6,12 @@
 
 package com.apayroll.views.dtr.rfid;
 
+import com.apayroll.models.EmployeeDTR;
+import com.apayroll.models.EmployeeRoster;
+import com.apayroll.models.components.DTRTableModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
 /**
@@ -15,9 +19,9 @@ import javax.swing.SwingUtilities;
  * @author sly
  */
 public class RfidScannerFrame extends javax.swing.JFrame {
-
+    JTable dtrTable;
     /** Creates new form RfidScannerFrame */
-    public RfidScannerFrame() {
+    public RfidScannerFrame(JTable dtrTable) {
         initComponents();
         this.addWindowListener(new WindowAdapter(){
             @Override
@@ -25,7 +29,7 @@ public class RfidScannerFrame extends javax.swing.JFrame {
                 txtFieldRfid.requestFocus();
             }
         });
-        
+        this.dtrTable = dtrTable;
         SwingUtilities.getRootPane(submit).setDefaultButton(submit);
     }
 
@@ -64,11 +68,16 @@ public class RfidScannerFrame extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
+        EmployeeRoster er = new EmployeeRoster();
         if(evt.getSource() == txtFieldRfid){
             submit.doClick();
         }
         else if (evt.getSource() == submit){
-            System.out.println(txtFieldRfid.getText());
+            if(er.work(txtFieldRfid.getText())){
+                EmployeeDTR edtr = er.getEmployeeDTRByRFID(txtFieldRfid.getText());
+                System.out.println(edtr.toString());
+                ((DTRTableModel) dtrTable.getModel()).update(edtr);
+            }
         }
         txtFieldRfid.setText("");
     }//GEN-LAST:event_submitActionPerformed

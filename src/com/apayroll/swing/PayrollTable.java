@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sly
  */
-public class DTRTable extends JTable{
-    public DTRTable() {
-        setShowHorizontalLines(true);
+public class PayrollTable extends JTable{
+    @SuppressWarnings("OverridableMethodCallInConstructor")
+    public PayrollTable(){
+     setShowHorizontalLines(true);
         setShowVerticalLines(false);
         setGridColor(new Color(230, 230, 230));
         setOpaque(false);
@@ -30,6 +31,7 @@ public class DTRTable extends JTable{
                 return header;
             }
         });
+        
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int row, int col){

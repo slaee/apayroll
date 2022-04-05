@@ -40,14 +40,14 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         sidebar = new com.apayroll.components.Sidebar();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        dashBoardPanel = new com.apayroll.views.main.DashBoardPanel();
+        dashboardPanel = new javax.swing.JPanel();
+        dashBoardPanel1 = new com.apayroll.views.main.DashBoardPanel();
         employeePanel = new javax.swing.JPanel();
         employeePanel1 = new com.apayroll.views.main.EmployeePanel();
-        jPanel3 = new javax.swing.JPanel();
+        payrollPage = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tacular");
-        setPreferredSize(new java.awt.Dimension(1215, 768));
         setResizable(false);
 
         jPanel4.setPreferredSize(new java.awt.Dimension(1230, 768));
@@ -57,8 +57,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTabbedPane2.setPreferredSize(new java.awt.Dimension(1000, 768));
 
-        dashBoardPanel.setPreferredSize(new java.awt.Dimension(970, 768));
-        jTabbedPane2.addTab("tab4", dashBoardPanel);
+        dashboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dashboardPanel.add(dashBoardPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jTabbedPane2.addTab("tab3", dashboardPanel);
 
         employeePanel.setBackground(new java.awt.Color(248, 249, 250));
         employeePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -66,18 +68,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("tab2", employeePanel);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 993, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 771, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("tab3", jPanel3);
+        payrollPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane2.addTab("tab3", payrollPage);
 
         jPanel4.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, -1, 800));
 
@@ -85,7 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1210, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1215, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,12 +90,13 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.apayroll.views.main.DashBoardPanel dashBoardPanel;
+    private com.apayroll.views.main.DashBoardPanel dashBoardPanel1;
+    private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel employeePanel;
     private com.apayroll.views.main.EmployeePanel employeePanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private static javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel payrollPage;
     private com.apayroll.components.Sidebar sidebar;
     // End of variables declaration//GEN-END:variables
 }

@@ -63,7 +63,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Daily Time Record");
+        jLabel2.setText("Employees");
         card5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         addEmployeeBtn.setBackground(new java.awt.Color(0, 153, 255));

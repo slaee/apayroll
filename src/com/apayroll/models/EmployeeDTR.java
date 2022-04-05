@@ -56,4 +56,9 @@ public class EmployeeDTR extends Employee{
     
     @Override
     public void computeSalary(){}
+
+    @Override
+    public String toString(){
+        return "id = " + getId() + ", rfid = " + getRfid() + ", firstName = " + getFirstName() + ", middleName = " + getMiddleName() + ", lastName = " + getLastName() + ", type = " + getType() + ", timeIn = " + getTimeIn() + ", timeOut = " + getTimeOut();
+    }
 }

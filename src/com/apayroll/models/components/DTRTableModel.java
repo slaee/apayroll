@@ -10,6 +10,7 @@ import com.apayroll.models.EmployeeDTR;
 import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -104,14 +105,22 @@ public class DTRTableModel extends AbstractTableModel{
     }
     
     // Add Employee
-    public boolean addRow(EmployeeDTR employee){
-        EmployeeRoster er = new EmployeeRoster();
-        if(er.addEmployee(employee)){
-            employee.setId(er.getLastInsertId());
-            dtrList.add(employee);
-            fireTableDataChanged();
-            return true;
+    public void update(EmployeeDTR edtr){
+        // match employee in the list
+        boolean found = false;
+        for(EmployeeDTR e : dtrList){
+            if(Objects.equals(e.getId(), edtr.getId()) && Objects.equals(e.getTimeIn(), edtr.getTimeIn())){
+                e.setTimeOut(edtr.getTimeOut());
+                System.out.println(e.toString());
+                found = true;
+                break;
+            }
         }
-        return false;
+        // otherwise add new data to the list
+        if(!found) {
+            dtrList.add(edtr);
+            System.out.println("True");
+        }
+        fireTableDataChanged();
     }
 }

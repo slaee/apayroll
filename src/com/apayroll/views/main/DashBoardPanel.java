@@ -8,6 +8,7 @@ package com.apayroll.views.main;
 import com.apayroll.chart.ModelChart;
 import com.apayroll.libcore.Database;
 import com.apayroll.models.EmployeeRoster;
+import com.apayroll.models.components.DTRTableModel;
 import com.apayroll.swing.ScrollBarCustom;
 import com.apayroll.views.dtr.rfid.RfidScannerFrame;
 import java.awt.Color;
@@ -19,13 +20,10 @@ import java.util.Date;
  * @author sly
  */
 public class DashBoardPanel extends javax.swing.JPanel {
-    Database db;
-    
     /**
      * Creates new form DashBoardPanel
      */
     public DashBoardPanel() {
-        db = new Database();
         initComponents();
         lineChart.addLegend("Total Net pay per month", Color.decode("#38B6FF"), Color.decode("#38B6FF"));
         lineChart.addLegend("Total Gross pay per month", Color.decode("#004AAD"), Color.decode("#004AAD"));
@@ -38,6 +36,7 @@ public class DashBoardPanel extends javax.swing.JPanel {
         
         EmployeeRoster er = new EmployeeRoster();
         er.updateList();
+        er.updateDTR_Record();
         labelTotalEmployee.setText(er.size()+" / 500");
 
         String month;
@@ -45,7 +44,9 @@ public class DashBoardPanel extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM 30, YYYY");
         month = sdf.format(date);
         labelPayrolReleaseDate.setText(month);
-        RfidScannerFrame rs = new RfidScannerFrame();
+        table.setModel(new DTRTableModel(er.getDtrRecordList()));
+        // Bind table for time in and time out
+        RfidScannerFrame rs = new RfidScannerFrame(table);
         rs.setVisible(true);
     }
 
