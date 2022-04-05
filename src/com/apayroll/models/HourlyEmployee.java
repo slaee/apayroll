@@ -52,6 +52,7 @@ public class HourlyEmployee extends Employee{
     public void setDailyRate(double dailyRate) {
         this.dailyRate = dailyRate;
     }
+    
     private double salary;
     private float workedHours;
     private double dailyRate;

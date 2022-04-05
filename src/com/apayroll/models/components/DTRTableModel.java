@@ -5,7 +5,6 @@
  */
 package com.apayroll.models.components;
 
-import com.apayroll.models.Employee;
 import com.apayroll.models.EmployeeDTR;
 import com.apayroll.models.EmployeeRoster;
 import com.apayroll.models.EmployeeType;
