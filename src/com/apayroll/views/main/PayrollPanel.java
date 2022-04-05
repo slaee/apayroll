@@ -5,6 +5,8 @@
  */
 package com.apayroll.views.main;
 
+import com.apayroll.swing.ScrollBarCustom;
+
 /**
  *
  * @author sly
@@ -16,6 +18,7 @@ public class PayrollPanel extends javax.swing.JPanel {
      */
     public PayrollPanel() {
         initComponents();
+        scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
 
     /**
@@ -27,8 +30,9 @@ public class PayrollPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         card1 = new com.apayroll.components.Card();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        payrollTable1 = new com.apayroll.swing.PayrollTable();
+        scrollTablePane = new javax.swing.JScrollPane();
+        payrollTable = new com.apayroll.swing.PayrollTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(248, 249, 250));
         setMinimumSize(new java.awt.Dimension(994, 794));
@@ -43,24 +47,26 @@ public class PayrollPanel extends javax.swing.JPanel {
         card1.setShadowType(com.apayroll.components.Card.ShadowType.BOTTOM);
         card1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        scrollTablePane.setBackground(new java.awt.Color(255, 255, 255));
+        scrollTablePane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        payrollTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        payrollTable1.setModel(new javax.swing.table.DefaultTableModel(
+        payrollTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        payrollTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Empoloyee ID", "Name", "Gross Pay", "Net Pay"
             }
         ));
-        jScrollPane1.setViewportView(payrollTable1);
+        scrollTablePane.setViewportView(payrollTable);
 
-        card1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 600));
+        card1.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 600));
+
+        jLabel2.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setText("Payroll");
+        card1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         add(card1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 960, 740));
     }// </editor-fold>//GEN-END:initComponents
@@ -68,7 +74,8 @@ public class PayrollPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.apayroll.components.Card card1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private com.apayroll.swing.PayrollTable payrollTable1;
+    private javax.swing.JLabel jLabel2;
+    private com.apayroll.swing.PayrollTable payrollTable;
+    private javax.swing.JScrollPane scrollTablePane;
     // End of variables declaration//GEN-END:variables
 }
