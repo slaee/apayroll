@@ -52,6 +52,7 @@ public class HourlyEmployee extends Employee{
     public void setDailyRate(double dailyRate) {
         this.dailyRate = dailyRate;
     }
+    
     private double salary;
     private float workedHours;
     private double dailyRate;
@@ -59,17 +60,17 @@ public class HourlyEmployee extends Employee{
     private final int REGULAR_WORKING_HOURS = 40;
     private final float OT_PAY_RATE = 1.25f;
     
-    public HourlyEmployee(String id, String firstName, String middleName, 
+    public HourlyEmployee(Long id, String rfid, String firstName, String middleName, 
         String lastName, EmployeeType type, double salary, double dailyRate, float workedHours){
-        super(id, firstName, middleName, lastName, type);
+        super(id, rfid, firstName, middleName, lastName, type);
         this.salary = salary;
         this.dailyRate = dailyRate;
         this.workedHours = workedHours;
     }
     
-    public HourlyEmployee(String id, String firstName, 
+    public HourlyEmployee(Long id, String rfid, String firstName, 
         String middleName, String lastName, EmployeeType type){
-        super(id, firstName, middleName, lastName, type);
+        super(id, rfid, firstName, middleName, lastName, type);
         dailyRate = 0;
         workedHours = 0;
         salary = 0;

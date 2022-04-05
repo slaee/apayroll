@@ -56,15 +56,15 @@ public class RegularEmployee extends Employee{
     private double regularSalary;
     private int absence;
     
-    public RegularEmployee(String id, String firstName, String middleName, String lastName, EmployeeType type, double salary, double regularSalary, int absence){
-        super(id, firstName, middleName, lastName, type);
+    public RegularEmployee(Long id, String rfid, String firstName, String middleName, String lastName, EmployeeType type, double salary, double regularSalary, int absence){
+        super(id, rfid, firstName, middleName, lastName, type);
         this.salary = salary;
         this.regularSalary = regularSalary;
         this.absence = absence;
     }
     
-    public RegularEmployee(String id, String firstName, String middleName, String lastName, EmployeeType type){
-        super(id, firstName, middleName, lastName, type);
+    public RegularEmployee(Long id, String rfid, String firstName, String middleName, String lastName, EmployeeType type){
+        super(id, rfid, firstName, middleName, lastName, type);
         regularSalary = 0;
         salary = 0;
         absence = 0;

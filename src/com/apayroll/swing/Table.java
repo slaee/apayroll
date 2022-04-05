@@ -5,7 +5,6 @@
  */
 package com.apayroll.swing;
 
-import com.apayroll.models.components.ButtonType;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
@@ -17,11 +16,12 @@ import javax.swing.table.DefaultTableModel;
  * @author sly
  */
 public class Table extends JTable{
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public Table() {
         setShowHorizontalLines(true);
         setShowVerticalLines(false);
         setGridColor(new Color(230, 230, 230));
-//        setOpaque(false);
+        setOpaque(false);
         setRowHeight(40);
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer(){
@@ -31,6 +31,7 @@ public class Table extends JTable{
                 return header;
             }
         });
+        
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int row, int col){

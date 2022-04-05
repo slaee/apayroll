@@ -3,16 +3,30 @@ package com.apayroll.models;
 public abstract class Employee {
 
     /**
+     * @return the rfid
+     */
+    public String getRfid() {
+        return rfid;
+    }
+
+    /**
+     * @param rfid the rfid to set
+     */
+    public void setRfid(String rfid) {
+        this.rfid = rfid;
+    }
+
+    /**
      * @return the id
      */
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,15 +85,30 @@ public abstract class Employee {
     public void setType(EmployeeType type) {
         this.type = type;
     }
+    
+    public String getFullName(){
+        return firstName+" "+middleName+" "+lastName;
+    }
+    
+    @Override
+    public String toString(){
+        return "ID: "+ id
+                +"\nRFID: " +rfid
+                +"\nFirst Name: "+firstName
+               +"\nMiddle Name: "+middleName
+               +"\nLast Name: "+lastName;
+    }
 
-    private String id;
+    private Long id;
+    private String rfid;
     private String firstName;
     private String middleName;
     private String lastName;
     private EmployeeType type;
     
-    public Employee(String id, String firstName, String middleName, String lastName, EmployeeType type){
+    public Employee(Long id, String rfid, String firstName, String middleName, String lastName, EmployeeType type){
         this.id = id;
+        this.rfid = rfid;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -91,4 +120,5 @@ public abstract class Employee {
     }
     
     public abstract void computeSalary();
+    
 }

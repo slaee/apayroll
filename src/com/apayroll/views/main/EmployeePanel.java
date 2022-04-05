@@ -7,16 +7,10 @@ package com.apayroll.views.main;
 
 import com.apayroll.components.Form;
 import com.apayroll.libcore.Database;
-import com.apayroll.models.components.ButtonType;
+import com.apayroll.models.Employee;
+import com.apayroll.models.EmployeeRoster;
+import com.apayroll.models.components.EmployeeTableModel;
 import com.apayroll.swing.ScrollBarCustom;
-import com.apayroll.swing.renderers.ButtonEditor;
-import com.apayroll.swing.renderers.ButtonRenderer;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTextField;
 
 /**
  *
@@ -30,31 +24,14 @@ public class EmployeePanel extends javax.swing.JPanel {
     public EmployeePanel() {
         db = new Database();
         initComponents();
-        try {
-            startFetchData();
-        } catch (SQLException ex) {
-            Logger.getLogger(EmployeePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initTableWithButton();
         scrollTablePane.setVerticalScrollBar(new ScrollBarCustom());
     }
     
-     public void startFetchData() throws SQLException{
-//        db.query("SELECT r.user_rfid_number, e.firstName, e.middleName, e.lastName, e.employeeType "
-//                + "FROM dbb_employee e "
-//                + "LEFT JOIN dbb_rfid r ON r.user_id = e.id");
-//        db.execute();
-//       
-//        for (Iterator<Object> it = db.fetchDataObjects().iterator(); it.hasNext();) {
-//            Vector<Object> o = (Vector<Object>) it.next();
-//
-//            table.addRow(new Object[] {o.get(0), o.get(1), o.get(2), o.get(3), o.get(4), "DELETE"});
-//            table.getColumn("Action").setCellRenderer(new ButtonRenderer());
-//            table.getColumn("Action").setCellEditor(new ButtonEditor(new JTextField()));
-//        }
-        table.addRow(new Object[] {"APC-242", "John", "Drake", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
-        table.addRow(new Object[] {"APC-122", "Maria", "Tes", "Doe", "REGULAR_EMPLOYEE", ButtonType.DELETE});
+    private void initTableWithButton(){
+        EmployeeRoster er = new EmployeeRoster();
+        er.updateList();
+        table.setModel(new EmployeeTableModel(er.getEmployeeList()));
         table.setCellNotEditorColumn("Action");
     }
 
@@ -86,7 +63,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("FreeSans", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Daily Time Record");
+        jLabel2.setText("Employees");
         card5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         addEmployeeBtn.setBackground(new java.awt.Color(0, 153, 255));
@@ -112,19 +89,19 @@ public class EmployeePanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Employee ID", "First Name", "Middle Name", "Last Name", "Type", "Action"
+                "Employee ID", "RFID No.", "First Name", "Middle Name", "Last Name", "Type", "Action"
             }
         ));
         scrollTablePane.setViewportView(table);
 
         card5.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 600));
 
-        add(card5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 960, 750));
+        add(card5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 960, 740));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed
         // TODO add your handling code here:
-        Form addEmployeeForm = new Form();
+        Form addEmployeeForm = new Form(table);
         addEmployeeForm.show();
     }//GEN-LAST:event_addEmployeeBtnActionPerformed
 
