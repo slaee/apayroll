@@ -96,7 +96,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         card5.add(scrollTablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 880, 600));
 
-        add(card5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 960, 750));
+        add(card5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 960, 740));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addEmployeeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeBtnActionPerformed

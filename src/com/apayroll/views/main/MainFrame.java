@@ -45,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
         employeePanel = new javax.swing.JPanel();
         employeePanel1 = new com.apayroll.views.main.EmployeePanel();
         payrollPage = new javax.swing.JPanel();
+        payrollPanel1 = new com.apayroll.views.main.PayrollPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tacular");
@@ -57,8 +58,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTabbedPane2.setPreferredSize(new java.awt.Dimension(1000, 768));
 
+        dashboardPanel.setMinimumSize(new java.awt.Dimension(970, 780));
+        dashboardPanel.setPreferredSize(new java.awt.Dimension(970, 780));
         dashboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        dashboardPanel.add(dashBoardPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        dashboardPanel.add(dashBoardPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, -1));
 
         jTabbedPane2.addTab("tab3", dashboardPanel);
 
@@ -69,6 +72,8 @@ public class MainFrame extends javax.swing.JFrame {
         jTabbedPane2.addTab("tab2", employeePanel);
 
         payrollPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        payrollPage.add(payrollPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 780));
+
         jTabbedPane2.addTab("tab3", payrollPage);
 
         jPanel4.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, -1, 800));
@@ -77,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1215, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1217, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,6 +102,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private static javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel payrollPage;
+    private com.apayroll.views.main.PayrollPanel payrollPanel1;
     private com.apayroll.components.Sidebar sidebar;
     // End of variables declaration//GEN-END:variables
 }

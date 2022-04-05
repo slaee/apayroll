@@ -46,8 +46,8 @@ public class DashBoardPanel extends javax.swing.JPanel {
         labelPayrolReleaseDate.setText(month);
         table.setModel(new DTRTableModel(er.getDtrRecordList()));
         // Bind table for time in and time out
-        RfidScannerFrame rs = new RfidScannerFrame(table);
-        rs.setVisible(true);
+//        RfidScannerFrame rs = new RfidScannerFrame(table);
+//        rs.setVisible(true);
     }
 
     /**
@@ -75,6 +75,7 @@ public class DashBoardPanel extends javax.swing.JPanel {
         lineChart = new com.apayroll.chart.LineChart();
 
         setBackground(new java.awt.Color(248, 249, 250));
+        setMinimumSize(new java.awt.Dimension(970, 770));
         setPreferredSize(new java.awt.Dimension(970, 770));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
